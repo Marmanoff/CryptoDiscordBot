@@ -2560,3 +2560,6 @@ packages/WebSocket4Net.0.15.2/lib/net40/WebSocket4Net.dll
 packages/WebSocket4Net.0.15.2/lib/net45/WebSocket4Net.dll
 packages/WebSocket4Net.0.15.2/lib/netstandard1.3/WebSocket4Net.dll
 packages/WebSocket4Net.0.15.2/WebSocket4Net.0.15.2.nupkg
+packages/Discord.Net.2.0.0/.signature.p7s
+packages/Discord.Net.2.0.0/Discord.Net.2.0.0.nupkg
+CryptoDiscordBot/obj/Debug/CryptoDiscordBot.csproj.FileListAbsolute.txt
