@@ -26,15 +26,15 @@ namespace CryptoDiscordBot
                     await Context.Channel.SendMessageAsync(Context.User.Mention + " **create your invite link first before checking your invites. Make sure you create your invite link through the create-invites channel and that you set the link to not expire. Not doing this will make your invites disappear/not count.**");
                 }
 
-                var myUses = getInvitesForUserFromChannel.Uses;
+                var myUses = (int)getInvitesForUserFromChannel.Uses;
                 var user = Context.User as IGuildUser;
 
-                var piRank = new Rank(myUses, user.Username);
-                var userRole = Context.Guild.Roles.FirstOrDefault(x => x.Name == piRank.CurrentRank);
+                var rank = new Rank(myUses, user.Username);
+                var userRole = Context.Guild.Roles.FirstOrDefault(x => x.Name == rank.CurrentRank);
                 await user.AddRoleAsync(userRole);
 
-                if (myUses <= 49) await Context.Channel.SendMessageAsync("", false, piRank.RankMessageUnderFiftyUsers());
-                else await Context.Channel.SendMessageAsync("", false, piRank.RankMessageAboveFiftyUsers());
+                if (myUses <= 49) await Context.Channel.SendMessageAsync("", false, rank.MessageWithRankup().Build());
+                else await Context.Channel.SendMessageAsync("", false, rank.MessageWithNoRankup().Build());
             }
         }
 
@@ -95,12 +95,12 @@ namespace CryptoDiscordBot
             if (int.Parse(embeds.Day) >= 1 || int.Parse(embeds.Hour.ToString()) >= 5)
             {
                 var signalChannel = (ISocketMessageChannel)Context.Client.GetChannel(400626676070875156);
-                await signalChannel.SendMessageAsync("", false, embeds.BuildEmbed());
+                await signalChannel.SendMessageAsync("", false, embeds.BuildEmbed().Build());
             }
             else
             {
                 var communityChannel = (ISocketMessageChannel)Context.Client.GetChannel(401353571498721280);
-                await communityChannel.SendMessageAsync("@everyone", false, embeds.BuildEmbed());
+                await communityChannel.SendMessageAsync("@everyone", false, embeds.BuildEmbed().Build());
             }
         }
     }
